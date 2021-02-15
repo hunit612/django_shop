@@ -5,8 +5,11 @@ venv/
 
 *.pyc
 
+<<<<<<< HEAD
 db.sqlite3
 
+=======
+>>>>>>> c3252245e53d751390db1cc76247a294c7a659d0
 */*/*/__pycache__/
 
 */*/__pycache__/
