@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path
 from khuser.views import index, RegisterView, LoginView
 from product.views import ProductList, ProductCreate, ProductDetail
+from order.views import OrderCreate
 
 
 urlpatterns = [
@@ -27,4 +28,5 @@ urlpatterns = [
     path('product/', ProductList.as_view()),
     path('product/<int:pk>/', ProductDetail.as_view()),
     path('product/create/', ProductCreate.as_view()),
+    path('order/create/', OrderCreate.as_view()),
 ]
