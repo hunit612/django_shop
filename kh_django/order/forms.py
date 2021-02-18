@@ -3,6 +3,8 @@ from django.db.models import query
 from .models import Order
 from product.models import Product
 from khuser.models import Khuser
+from django.db import transaction
+
 
 class RegisterForm(forms.Form):
     def __init__(self, request, *args, **kwargs):
@@ -29,12 +31,16 @@ class RegisterForm(forms.Form):
         khuser = self.request.session.get('user')
 
         if quantity and product and khuser:
-            order = Order(
-                quantity=quantity,
-                product=Product.objects.get(pk=product),
-                khuser=Khuser.objects.get(email=khuser)
-            )
-            order.save()
+            with transaction.atomic():
+                prod = Product.objects.get(pk=product)
+                order = Order(
+                    quantity=quantity,
+                    product=Product.objects.get(pk=product),
+                    khuser=Khuser.objects.get(email=khuser)
+                )
+                order.save()
+                prod.stock -= quantity
+                prod.save()
         else:
             self.product = product
             self.add_error('quantity', '값이 없습니다')
