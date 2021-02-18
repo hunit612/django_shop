@@ -1,6 +1,9 @@
 from django.shortcuts import redirect, render
+from django.views.generic import DetailView
 from django.views.generic.edit import FormView
+from django.contrib.auth.hashers import make_password
 from .forms import RegisterForm, LoginForm
+from .models import Khuser
 
 
 def index(request):
@@ -11,6 +14,16 @@ class RegisterView(FormView):
     form_class = RegisterForm
     success_url = '/'
 
+    def form_valid(self, form):
+        khuser = Khuser(
+            email=form.data.get('email'),
+            password=make_password(form.data.get('password')),
+            level='user'
+        )
+        khuser.save()
+
+        return super().form_valid(form)
+
 
 class LoginView(FormView):
     template_name = 'login.html'
@@ -18,7 +31,7 @@ class LoginView(FormView):
     success_url = '/'
 
     def form_valid(self, form):
-        self.request.session['user'] = form.email
+        self.request.session['user'] = form.data.get('email')
         
         return super().form_valid(form)
 
