@@ -30,7 +30,18 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
+BATON = {
+    'SITE_HEADER': '백오피스1',
+    'SITE_TITLE': '백오피스2',
+    'INDEX_TITLE': '관리자 페이지',
+    'SUPPORT_HREF': 'https://naver.com',
+    'COPYRIGHT': 'copyright 2021 HUNIT',
+    'POWERED_BY': '<a href="https://naver.com">HUNIT</a>',
+    'MENU_TITLE': 'HUNIT'
+}
+
 INSTALLED_APPS = [
+    'baton',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -38,7 +49,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.humanize',
-    'rest_framework'
+    'rest_framework',
+    
+    'baton.autodiscover'
 ]
 
 INSTALLED_APPS += [

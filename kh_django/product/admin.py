@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.utils.html import format_html
-from django.contrib.humanize import intcomma
+from django.contrib.humanize.templatetags.humanize import intcomma
 from .models import Product
 # Register your models here.
 
