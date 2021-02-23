@@ -6,6 +6,10 @@ from .models import Khuser
 class KhuserAdmin(admin.ModelAdmin):
     list_display = ('email', )
 
+    def changelist_view(self, request, extra_context=None):
+        extra_context = { 'title': '사용자 목록' }
+        return super().changelist_view(request,extra_context)
+
     
 admin.site.register(Khuser, KhuserAdmin)
 admin.site.site_header = '후니'

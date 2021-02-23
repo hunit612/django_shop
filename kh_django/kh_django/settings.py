@@ -55,9 +55,9 @@ INSTALLED_APPS = [
 ]
 
 INSTALLED_APPS += [
-    'khuser',
-    'order',
-    'product',
+    'khuser.apps.KhuserConfig',
+    'order.apps.OrderConfig',
+    'product.apps.ProductConfig',
 ]
 
 MIDDLEWARE = [
