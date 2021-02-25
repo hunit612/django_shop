@@ -1,3 +1,4 @@
+from django.db.models import F
 from django.contrib import admin
 from django.utils.html import format_html
 from .models import Order
@@ -5,10 +6,24 @@ from .models import Order
 
 # Register your models here.
 
+def refund(modeladmin, request, queryset):
+        queryset.update(status='환불')
+        for obj in queryset:
+            obj.product.stock += obj.quantity
+            obj.product.save()
+
+
+refund.short_description = '환불'
 
 class OrderAdmin(admin.ModelAdmin):
     list_filter = ('status',)
     list_display = ('khuser', 'product', 'styled_status')
+
+    actions = [
+        refund
+    ]
+
+    
 
     def styled_status(self, obj):
         if obj.status == '환불':
