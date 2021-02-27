@@ -78,6 +78,8 @@ class OrderAdmin(admin.ModelAdmin):
     def changeform_view(self, request, object_id=None, form_url='', extra_context=None):
         order = Order.objects.get(pk=object_id)      
         extra_context = { 'title': f'{order.khuser.email}의 {order.product.name} 주문 수정하기' }
+        extra_context['show_save_and_add_another'] = False
+        extra_context['show_save_and_continue'] = False
         return super().changeform_view(request, object_id, form_url, extra_context)
 
     styled_status.short_description = '상태'
